@@ -1,5 +1,5 @@
 class Six
-  purchases = {
+  @@purchases = {
     'beer'=> [{16.5=>4},16.5*4],
     'salt' => [{0.3=>10},0.3*10],
     'pizza' => [{1=>1},1],
@@ -24,15 +24,21 @@ class Six
   end
 
   def print_purchases(purchases, sum)
-    puts "Product             |Price|Amount|Total product price"
+    puts 'Product              |  Price     |  Amount    |Total product price'
     purchases.each do |key, value|
-    puts key + " "*(20-key.to_s.length) + ' | ' + value[0].keys + " "*(20-value[0].keys.to_s.length) + ' | ' +
-          value[0].values + " "*(20-value[0].values.to_s.length) + ' | ' + value[1]
-    puts "Sum of products #{sum}"
+    puts key + ' ' * (20-key.to_s.length) + ' | ' + value[0].keys.to_s + ' ' * (10-value[0].keys.to_s.length) + ' | ' +
+          value[0].values.to_s + ' ' * (10-value[0].values.to_s.length) + ' | ' + value[1].to_s
+    end
+    puts "                                Sum of products| #{sum}"
   end
 
-  def test(purchases)
-
+  def test
+    sum = 0
+    temp = @@purchases.values
+    temp.each { |pr| sum += pr[1] }
+    print_purchases(@@purchases, sum)
   end
   #{key}     |  #{value[0].keys} |  #{value[0].values}  | #{value[1]} \n"
 end
+
+Six.new.test
