@@ -20,7 +20,7 @@ class Monthes
   attr_reader :monthes
 
   def print_30_days_monthes
-    MONTHES.each { |key, value| puts "#{key}" if (value % 30).zero? }
+    MONTHES.each { |key, value| puts "#{key}.to_s" if (value % 30).zero? }
   end
 end
 
