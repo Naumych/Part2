@@ -4,7 +4,7 @@ def print_five_step_array
   i = 10
   five_step_array = []
   until i == 105
-    arr << i
+    five_step_array << i
     i += 5
   end
   puts five_step_array
