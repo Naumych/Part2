@@ -10,8 +10,12 @@ class DayNumber
     [day, month, year]
   end
 
-  def leap?(year, months)
-    months[2] = if ((year % 4).zero? && (year % 100) != 0) || (year % 400).zero?
+  def leap?(year)
+    ((year % 4).zero? && (year % 100) != 0) || (year % 400).zero?
+  end
+
+  def calculate_months_for_leap(year, months)
+    months[2] = if leap? year
                   29
                 else
                   28
@@ -30,9 +34,10 @@ class DayNumber
 
   def execute_algorithm(months)
     date = fetch_day_month_year
-    months = leap?(date[2], months)
+    months = calculate_months_for_leap date[2], months
     days_collector months
-    puts "It's #{days_collector[date[1]] + date[0] - 1} day of year"
+    day_of_year = days_collector[date[1]] + date[0] - 1
+    puts "It's #{day_of_year} day of year"
   end
 end
 
