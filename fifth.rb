@@ -2,58 +2,31 @@
 
 # class
 class DayNumber
-  def fetch_day_month_year
-    puts 'Input day, month, year in number format'
-    day = gets.chomp.to_i
-    month = gets.chomp.to_i
-    year = gets.chomp.to_i
-    [day, month, year]
+  def calculate_ordinal_day_since_begining_of_year(day, month, year)
+    months = fetch_months year
+    months[0...month - 1].sum + day - 1
   end
+
+  private
 
   def leap?(year)
     ((year % 4).zero? && (year % 100) != 0) || (year % 400).zero?
   end
 
-  def calculate_months_for_leap(year, months)
-    months[2] = if leap? year
-                  29
-                else
-                  28
-                end
+  def fetch_months(year)
+    months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    months[1] = 29 if leap? year
     months
-  end
-
-  # this method collects in number of month inf about amount of days starting from New Year
-  def days_collector(months, days = {}, counter = 1)
-    months.each_pair do |key, value|
-      days[key] = counter
-      counter += value
-    end
-    days
-  end
-
-  def execute_algorithm(months)
-    date = fetch_day_month_year
-    months = calculate_months_for_leap date[2], months
-    days_collector months
-    day_of_year = days_collector[date[1]] + date[0] - 1
-    puts "It's #{day_of_year} day of year"
   end
 end
 
-months = {
-  1 => 31,
-  2 => 28,
-  3 => 31,
-  4 => 30,
-  5 => 31,
-  6 => 30,
-  7 => 31,
-  8 => 31,
-  9 => 30,
-  10 => 31,
-  11 => 30,
-  12 => 31
-}
+def fetch_day_month_year
+  puts 'Input day, month, year in number format'
+  day = gets.chomp.to_i
+  month = gets.chomp.to_i
+  year = gets.chomp.to_i
+  [day, month, year]
+end
 
-DayNumber.new.execute_algorithm months
+date = fetch_day_month_year
+puts DayNumber.new.calculate_ordinal_day_since_begining_of_year date[0], date[1], date[2]
