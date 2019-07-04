@@ -8,4 +8,9 @@ def fetch_number_of_vowel(alphabet = {}, counter = 0)
   alphabet
 end
 
-puts fetch_number_of_vowel
+def calculate_number_of_vowel(array_of_letters)
+  list = {}
+  array_of_letters.each_with_index { |letter, index| list[letter] = index}.select{|letter, _index| %w[a e i o u].include? letter}
+end
+
+puts calculate_number_of_vowel('a'..'z')
