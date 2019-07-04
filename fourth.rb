@@ -2,7 +2,7 @@
 
 def fetch_number_of_vowel(alphabet = {}, counter = 0)
   ('a'..'z').each do |letter|
-    alphabet[letter.to_s] = i if %w[a e i o u].include? letter
+    alphabet[letter.to_s] = counter if %w[a e i o u].include? letter
     counter += 1
   end
   alphabet
